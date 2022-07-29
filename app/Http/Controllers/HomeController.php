@@ -25,4 +25,11 @@ class HomeController extends Controller
     {
         return view('create');
     }
+    public function store(Request $request)
+    {
+        $posts = $request->all();
+        // dump dieの略 -> メソッドの引数の取った値を展開して止める -> データの確認
+        dd($posts);
+        return view('create');
+    }
 }
