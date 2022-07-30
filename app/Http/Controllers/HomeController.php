@@ -24,7 +24,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('create');
+        // ここでメモを取得
+        $memos = Memo::select('memos.*')
+            ->where('user_id', '=' , \Auth::id())
+            ->whereNull('deleted_at')
+            ->orderBy('updated_at', 'DESC')// ASC=小さい順、DESC=大きい順
+            ->get();
+            // dd($memos);
+
+        return view('create', compact('memos'));
     }
     public function store(Request $request)
     {
@@ -35,4 +43,20 @@ class HomeController extends Controller
         Memo::insert(['content' => $posts['content'], 'user_id' => \Auth::id()]);
         return redirect( route('home') );
     }
+
+    public function edit($id)
+    {
+        // ここでメモを取得
+        $memos = Memo::select('memos.*')
+            ->where('user_id', '=' , \Auth::id())
+            ->whereNull('deleted_at')
+            ->orderBy('updated_at', 'DESC')// ASC=小さい順、DESC=大きい順
+            ->get();
+            // dd($memos);
+
+        $edit_memo = Memo::find($id);
+
+        return view('edit', compact('memos', 'edit_memo'));
+    }
+
 }

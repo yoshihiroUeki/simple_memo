@@ -59,8 +59,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -88,9 +88,11 @@
                 </div>
                 <div class="col-md-4 p-0">
                     <div class="card">
-                        <div class="card-header">中央カラム</div>
+                        <div class="card-header">メモ一覧</div>
                         <div class="card-body">
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    @foreach ($memos as $memo)
+                    <a href="/edit/{{$memo['id']}}"  class="card-text d-block">{{ $memo['content'] }}</a>
+                    @endforeach
                         </div>
                     </div>
                 </div>
