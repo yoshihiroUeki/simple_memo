@@ -70,5 +70,16 @@ class HomeController extends Controller
         return redirect( route('home') );
     }
 
+    public function destory(Request $request)
+    {
+        $posts = $request->all();
+        // dd($posts);
+        // dump dieの略 -> メソッドの引数の取った値を展開して止める -> データの確認
+        // dd(\Auth::id());
+
+        Memo::where('id', $posts['memo_id'])->update(['deleted_at' => date("Y-m-d H:i:s", time())]);
+        return redirect( route('home') );
+    }
+
 
 }
